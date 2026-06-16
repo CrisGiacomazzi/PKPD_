@@ -12,6 +12,9 @@ Using advanced data visualization techniques in R, this project provides a unifi
 
 # Result
 
+<img width="3276" height="1460" alt="image" src="https://github.com/user-attachments/assets/57c30548-d577-4fa6-8630-ae410e468a87" />
+
+
 # Data Specifications & Data Dictionary
 
 This dataset follows a standardized pharmacometric (NONMEM-style) structure containing both pharmacokinetic (PK) and pharmacodynamic (PD) variables, alongside baseline patient covariates.
@@ -70,7 +73,42 @@ The absolute lowest concentration of a drug that the laboratory equipment can re
 
 # Libraries
 
+library(dplyr)
+library(ggplot2)
 
+# Functions
+## R Functions Glossary
+
+The following table summarizes all the functions utilized in this analysis pipeline, categorized by their respective R packages, along with a brief description of their purpose in the script.
+
+| Package | Function | Description / Practical Purpose in This Script |
+| :--- | :--- | :--- |
+| **`dplyr`** | `filter()` | Subsets rows to remove missing observations (`LIDV`, `TIME`) and restricts the timeline to `TIME < 50`. |
+| **`dplyr`** | `mutate()` | Creates or transforms columns (used to generate time bins, convert data types, and re-level factors). |
+| **`dplyr`** | `group_by()` | Groups the data by assay type (`NAME`) and interval (`Time_Bin`) for group-specific summary calculations. |
+| **`dplyr`** | `summarise()` | Compresses multiple rows into summary statistics; calculates the sample size `n()` for each group. |
+| **`base`** | `cut()` | Converts the continuous numeric `TIME` vector into discrete interval categories based on specific cutoff `breaks`. |
+| **`base`** | `factor()` | Converts a variable into a categorical factor to enforce a specific plotting order (e.g., `"PK"` before `"PD"`). |
+| **`base`** | `as.character()` | Converts factor-based time bins into raw text characters so they can safely be transformed into numbers. |
+| **`base`** | `as.numeric()` | Converts text intervals back into numeric values to map exact coordinates on the plot's X-axis. |
+| **`base`** | `paste0()` | Concatenates text strings without spaces to build dynamic labels (e.g., converting `15` into `"n = 15"`). |
+| **`ggplot2`** | `ggplot()` | Initializes the coordinate system and defines the default data source and aesthetic mappings (`x` and `y`). |
+| **`ggplot2`** | `aes()` | Handles aesthetic mapping; links dataset columns (like `TIME`) to visual properties of the plot. |
+| **`ggplot2`** | `geom_point()` | Adds a scatter plot layer to display individual, raw PK/PD data points in a subtle grey color. |
+| **`ggplot2`** | `geom_vline()` | Draws vertical reference lines to mark key study milestones (Baseline Day 0 and Cutoff Day 60). |
+| **`ggplot2`** | `geom_hline()` | Draws a horizontal reference line from an external dataset (`intercept_data`) to denote a target threshold. |
+| **`ggplot2`** | `geom_smooth()` | Fits a non-parametric local regression curve (`method = "loess"`) with a 95% confidence interval band. |
+| **`ggplot2`** | `facet_wrap()` | Splits the visualization into stacked panels based on `NAME`, allowing independent Y-axis scales. |
+| **`ggplot2`** | `labeller()` | Customizes the text displayed on the facet headers using a pre-defined lookup list (`facet_labels`). |
+| **`ggplot2`** | `scale_y_log10()` | Transforms the continuous Y-axis to a $\log_{10}$ scale, which is standard for analyzing exponential PK decay. |
+| **`ggplot2`** | `scale_color_manual()` | Assigns explicit, custom colors and corresponding legend titles to the specified reference lines. |
+| **`ggplot2`** | `geom_text()` | Injects text annotations into the plot; maps the calculated sample sizes (`n = ...`) onto the canvas. |
+| **`ggplot2`** | `coord_cartesian()` | Defines the plot bounding box; setting `clip = "off"` allows text to be drawn outside the main panel margins. |
+| **`ggplot2`** | `theme_classic()` | Applies a clean background theme with solid axis lines and no distracting background grid lines. |
+| **`ggplot2`** | `theme()` | Fine-tunes non-data elements of the plot, such as moving the legend to the bottom and adjusting margins. |
+| **`ggplot2`** | `margin()` | Defines custom padding space (top, right, bottom, left) around plot elements, measured in points. |
+| **`ggplot2`** | `element_text()` | Mandates formatting for text elements; used to push the horizontal axis title further down. |
+| **`ggplot2`** | `labs()` | Organizes all structural plot typography, including the `title`, `subtitle`, axis labels, and `caption`. |
 
 ## Data Source
 
