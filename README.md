@@ -12,7 +12,6 @@ Using advanced data visualization techniques in R, this project provides a unifi
 
 # Result
 
-<img width="1850" height="1460" alt="image" src="https://github.com/user-attachments/assets/47ea2b2a-28d4-4346-b2b4-d1c7ca639277" />
 
 
 # Data Specifications & Data Dictionary
