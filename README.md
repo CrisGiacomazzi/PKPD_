@@ -11,6 +11,7 @@ Using advanced data visualization techniques in R, this project provides a unifi
 - Benchmarking: Static horizontal target thresholds and explicit sample sizes ($n$) annotated across time intervals to provide strict context for therapeutic target attainment.By optimizing data density and clarity, this visualization serves as a powerful analytical tool for clinical pharmacologists and strategic leaders alike, ensuring that critical data trends are recognized at a glance.
 
 # Result
+<img width="2322" height="1460" alt="image" src="https://github.com/user-attachments/assets/0dd781a6-6fb5-46dc-9239-6ef27a85a4f9" />
 
 
 
